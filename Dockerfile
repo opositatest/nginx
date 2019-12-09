@@ -1,15 +1,11 @@
-FROM nginx:1.15
+FROM nginx:1.16
 
-ADD conf.d /etc/nginx/conf.d
-ADD https_force.conf /etc/nginx/https_force.conf
+ADD configuration /etc/nginx/configuration
 ADD entrypoint.sh /entrypoint.sh
 ADD nginx.conf /etc/nginx/nginx.conf
 
 RUN rm /etc/nginx/conf.d/default.conf && \
     chmod +x /entrypoint.sh
-
-
-RUN echo "upstream php-upstream { server php:9000; }" > /etc/nginx/conf.d/00_upstream.conf
 
 ENTRYPOINT ["/entrypoint.sh"]
 
