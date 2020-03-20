@@ -8,3 +8,4 @@ apt update && apt install -y curl --no-install-recommends
 if [[ $(curl -s 'http://localhost/') != 'Ok' ]];then
 	exit 1
 fi
+
