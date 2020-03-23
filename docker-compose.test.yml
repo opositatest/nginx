@@ -10,11 +10,11 @@ services:
     depends_on:
       - nginx
 
-    nginx:
-      build: .
-      volumes:
-        - ./test/index.php:/var/www/html/web/index.php
-        - ./test/test.sh:/tmp/test.sh
-      environment:
-        - APP_ENV=${APP_ENV}
-      command: bash -x /tmp/test.sh
+  nginx:
+    build: .
+    volumes:
+      - ./test/index.php:/var/www/html/web/index.php
+      - ./test/test.sh:/tmp/test.sh
+    environment:
+      - APP_ENV=${APP_ENV}
+    command: bash -x /tmp/test.sh
