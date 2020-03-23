@@ -6,9 +6,6 @@ services:
       - ./test/index.php:/var/www/html/web/index.php
     environment:
       - APP_ENV=${APP_ENV}
-    container_name: php
-    depends_on:
-      - nginx
 
   nginx:
     build: .
@@ -17,4 +14,8 @@ services:
       - ./test/test.sh:/tmp/test.sh
     environment:
       - APP_ENV=${APP_ENV}
-    command: bash -x /tmp/test.sh
+    depends_on:
+      - sut
+    links:
+      - sut:php
+    command: bash /tmp/test.sh
