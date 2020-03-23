@@ -1,14 +1,5 @@
 version: '3.2'
 services:
-  nginx:
-    build: .
-    volumes:
-      - ./test/index.php:/var/www/html/web/index.php
-      - ./test/test.sh:/tmp/test.sh
-    environment:
-      - APP_ENV=${APP_ENV}
-    command: bash -x /tmp/test.sh
-
   sut:
     image: opositatest/php-fpm:7.4
     volumes:
@@ -18,3 +9,12 @@ services:
     container_name: php
     depends_on:
       - nginx
+
+    nginx:
+      build: .
+      volumes:
+        - ./test/index.php:/var/www/html/web/index.php
+        - ./test/test.sh:/tmp/test.sh
+      environment:
+        - APP_ENV=${APP_ENV}
+      command: bash -x /tmp/test.sh
