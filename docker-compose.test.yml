@@ -3,14 +3,14 @@ services:
   php:
     image: opositatest/php-fpm:7.4
     volumes:
-      - ./test/index.php:/var/www/html/web/index.php
+      - ./test/index.php:/var/www/html/public/index.php
     environment:
       - APP_ENV=${APP_ENV}
 
   sut:
     build: .
     volumes:
-      - ./test/index.php:/var/www/html/web/index.php
+      - ./test/index.php:/var/www/html/public/index.php
       - ./test/test.sh:/tmp/test.sh
     environment:
       - APP_ENV=${APP_ENV}
