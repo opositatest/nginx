@@ -1,0 +1,19 @@
+name: Test
+on:
+  push:
+    branches: ["main", "sf4"]
+  pull_request:
+    branches: ["main", "sf4"]
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - uses: actions/checkout@v2
+    - uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    - name: Run test
+      run: docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
