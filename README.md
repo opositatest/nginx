@@ -1,4 +1,5 @@
 # Opositatest nginx
+![Github Actions](https://github.com/opositatest/varnish-jwt/actions/workflows/test.yml/badge.svg?branch=main)
 
 Install
 ---
