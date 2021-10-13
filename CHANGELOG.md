@@ -1,4 +1,8 @@
 Changelog nginx with symfony >= 4.x
+* v1.4 (2021-10.13)
+	* [FEATURE] Added Integration with Github Actions [#9](https://github.com/opositatest/nginx/pull/9)
+	* Moved the "include" of the custom setting to the end of file in nginx.conf to able overwrite any configure
+
 * v1.3 (2021-09.17)
 	* [FEATURE] Increase max file size to 30MB [#8](https://github.com/opositatest/nginx/pull/8)
 	
