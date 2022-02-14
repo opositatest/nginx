@@ -1,9 +1,10 @@
 version: '3.2'
 services:
   php:
-    image: opositatest/php-fpm:7.4
+    image: opositatest/php-fpm
     volumes:
       - ./test/index.php:/var/www/html/public/index.php
+      - php_unix_socket:/run/php/
     environment:
       - APP_ENV=${APP_ENV}
 
@@ -12,8 +13,11 @@ services:
     volumes:
       - ./test/index.php:/var/www/html/public/index.php
       - ./test/test.sh:/tmp/test.sh
+      - php_unix_socket:/run/php/
     environment:
       - APP_ENV=${APP_ENV}
     depends_on:
       - php
     command: bash -x /tmp/test.sh
+volumes:
+  php_unix_socket:
