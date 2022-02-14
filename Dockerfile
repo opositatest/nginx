@@ -1,4 +1,4 @@
-FROM nginx:1.18
+FROM nginx:1.20
 
 ADD configuration /etc/nginx/configuration
 ADD entrypoint.sh /entrypoint.sh
