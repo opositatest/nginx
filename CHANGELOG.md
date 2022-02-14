@@ -1,4 +1,7 @@
 Changelog nginx with symfony >= 4.x
+* v2.0 (2022-02-14)
+	* [FEATURE] Move to unix socket
+
 * v1.4 (2021-10.13)
 	* [FEATURE] Added Integration with Github Actions [#9](https://github.com/opositatest/nginx/pull/9)
 	* Moved the directive "include" in to the custom setting to the end of file in nginx.conf to able overwrite any configure
