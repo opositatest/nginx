@@ -1,8 +1,8 @@
 name: CICD
 on:
   push:
-    tags:
-      - '*'
+    tags: [ '*' ]
+    branches: [ "main" ]
   workflow_dispatch:
 env:
       DOCKERHUB_REPOSITORY: opositatest/nginx
@@ -29,22 +29,28 @@ jobs:
       run: docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 
     - name: Get the version
+      if: github.event_name == 'tags'
       id: get_version
       run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
 
-    - name: Build, tag and push image to Dockerhub
-      env:
-        VERSION: ${{ steps.get_version.outputs.version }}
-      run: |
-        docker build -t ${DOCKERHUB_REPOSITORY}:${VERSION} .
-        docker push ${DOCKERHUB_REPOSITORY}:${VERSION}
-    
     - uses: aws-actions/amazon-ecr-login@v1
       id: login-ecr
-    - name: Build, tag and push image to Amazon ECR
+
+    - name: Build, tag and push image to Dockerhub and ECR - Tag
+      if: github.event_name == 'tags'
       env:
         VERSION: ${{ steps.get_version.outputs.version }}
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        docker build -t ${ECR_REGISTRY}/${ECR_REPOSITORY}:${VERSION} .
+        docker build -t ${DOCKERHUB_REPOSITORY}:${VERSION} .
+        docker push ${DOCKERHUB_REPOSITORY}:${VERSION}
         docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${VERSION}
+    
+    - name: Build, tag and push image to Dockerhub and ECR - latest
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      run: |
+        docker build -t ${DOCKERHUB_REPOSITORY}:latest .
+        docker push ${DOCKERHUB_REPOSITORY}:latest
+        docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
