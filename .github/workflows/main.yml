@@ -43,6 +43,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
         docker build -t ${DOCKERHUB_REPOSITORY}:${VERSION} .
+        docker tag ${DOCKERHUB_REPOSITORY}:${VERSION} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${VERSION}
         docker push ${DOCKERHUB_REPOSITORY}:${VERSION}
         docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${VERSION}
     
@@ -52,5 +53,6 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
         docker build -t ${DOCKERHUB_REPOSITORY}:latest .
+        docker tag ${DOCKERHUB_REPOSITORY}:latest ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
         docker push ${DOCKERHUB_REPOSITORY}:latest
         docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:latest
