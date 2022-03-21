@@ -1,12 +1,7 @@
 FROM nginx:1.20
 
-ADD configuration /etc/nginx/configuration
-ADD entrypoint.sh /entrypoint.sh
+ADD configuration/10_symfony.conf /etc/nginx/conf.d/10_symfony.conf
 ADD nginx.conf /etc/nginx/nginx.conf
-
-RUN rm /etc/nginx/conf.d/default.conf && \
-    chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+RUN rm /etc/nginx/conf.d/default.conf
 
 CMD ["nginx", "-g", "daemon off;"]
