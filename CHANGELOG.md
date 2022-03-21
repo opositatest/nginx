@@ -1,4 +1,8 @@
 Changelog nginx with symfony >= 4.x
+* v2.1 (2022-03-21)
+	* Remove APP_ENV variable support
+	* Change fastcgi_* parms to default values
+
 * v2.0 (2022-02-14)
 	* [FEATURE] Move to unix socket
 
