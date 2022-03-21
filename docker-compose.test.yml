@@ -14,8 +14,6 @@ services:
       - ./test/index.php:/var/www/html/public/index.php
       - ./test/test.sh:/tmp/test.sh
       - php_unix_socket:/run/php/
-    environment:
-      - APP_ENV=${APP_ENV}
     depends_on:
       - php
     command: bash -x /tmp/test.sh

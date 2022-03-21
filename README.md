@@ -20,7 +20,7 @@ docker network create my-network
 docker run -d --net=my-network -e APP_ENV=dev --name php opositatest/php-fpm:latest
 
 # Run Nginx server:
-docker run --net=my-network -e APP_ENV=dev --name [CONTAINER_NAME] opositatest/nginx:latest
+docker run --net=my-network --name [CONTAINER_NAME] opositatest/nginx:latest
 ```
 
 
@@ -30,5 +30,3 @@ Test service Nginx with php-fpm backend:
 docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
 ````
 
-Environment in .env:
-* APP_ENV=(dev|prod)
