@@ -1,4 +1,13 @@
 Changelog nginx with symfony >= 4.x
+* v2.4 (2024-01-23)
+	* update nginx to 1.24
+
+* v2.3 (2022-04-13)
+	* Increase buffer to double to avoid errors with large headers
+
+* v2.2 (2022-03-31)
+	* Increase buffer to 16k to avoid issue when big headers
+
 * v2.1 (2022-03-21)
 	* Remove APP_ENV variable support
 	* Change fastcgi_* parms to default values
