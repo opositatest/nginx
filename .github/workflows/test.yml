@@ -3,19 +3,21 @@ on:
   pull_request:
     branches: ["main", "sf4"]
   workflow_dispatch:
+  workflow_call:
+
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
-    - uses: docker/login-action@v1
+    - uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Build
-      run: docker-compose -f docker-compose.test.yml build
+      run: docker compose -f docker-compose.test.yml build
     - name: Run test
-      run: docker-compose -f docker-compose.test.yml up --abort-on-container-exit
+      run: docker compose -f docker-compose.test.yml up --abort-on-container-exit
