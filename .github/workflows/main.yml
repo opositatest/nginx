@@ -12,9 +12,19 @@ env:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
   cicd:
-    runs-on: ubuntu-latest
+    needs: test
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 20
+    strategy:
+      matrix:
+        include:
+          - runner: public-ubuntu-latest-arm64
+          - runner: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     
