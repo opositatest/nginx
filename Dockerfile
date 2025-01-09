@@ -1,4 +1,4 @@
-FROM nginx:1.24
+FROM nginx:1.27
 
 ADD configuration/10_symfony.conf /etc/nginx/conf.d/10_symfony.conf
 ADD nginx.conf /etc/nginx/nginx.conf
