@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: ["main", "sf4"]
   workflow_dispatch:
+  workflow_call:
 jobs:
   test:
     runs-on: ubuntu-latest
