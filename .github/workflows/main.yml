@@ -52,10 +52,10 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
-        docker build -t ${DOCKERHUB_REPOSITORY}:${version}-${matrix.arch} .
-        docker tag ${DOCKERHUB_REPOSITORY}:${version}-${matrix.arch} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version}-${matrix.arch}
-        docker push ${DOCKERHUB_REPOSITORY}:${version}-${matrix.arch}
-        docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version}-${matrix.arch}
+        docker build -t ${DOCKERHUB_REPOSITORY}:${version}-${{ matrix.arch }} .
+        docker tag ${DOCKERHUB_REPOSITORY}:${version}-${{ matrix.arch }} ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version}-${{ matrix.arch }}
+        docker push ${DOCKERHUB_REPOSITORY}:${version}-${{ matrix.arch }}
+        docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version}-${{ matrix.arch }}
 
   merge:
     runs-on: ubuntu-latest
