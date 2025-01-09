@@ -85,8 +85,9 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       run: |
+        docker buildx imagetools create -t ${DOCKERHUB_REPOSITORY}:${version} \
+          ${DOCKERHUB_REPOSITORY}:${version}-amd64 \
+          ${DOCKERHUB_REPOSITORY}:${version}-arm64
         docker buildx imagetools create -t ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version} \
           ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version}-amd64 \
           ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version}-arm64
-        docker tag ${ECR_REGISTRY}/${ECR_REPOSITORY}:${version} ${DOCKERHUB_REPOSITORY}:${version}
-        docker push ${DOCKERHUB_REPOSITORY}:${version}
