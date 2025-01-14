@@ -1,4 +1,8 @@
 Changelog nginx with symfony >= 4.x
+
+* v2.5 (2025-01-09)
+	* update nginx to 1.27
+
 * v2.4 (2024-01-23)
 	* update nginx to 1.24
 
