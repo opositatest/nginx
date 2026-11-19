@@ -1,5 +1,8 @@
 Changelog nginx with symfony >= 4.x
 
+* v2.8 (2026-11-19)
+	* update nginx to 1.31.9
+
 * v2.7 (2026-10-16)
 	* update nginx to 1.31.7
 
